@@ -38,7 +38,7 @@
         const [img, setImg] = useState([]);
         const [filterData, setfilterData] = useState([]);
         useEffect(() => {
-          fetch("data.json")
+          fetch("./data/data.json")
             .then(res => {
               return res.json();
             })
@@ -46,7 +46,9 @@
               console.log(data.length);
               setImg(data);
               setfilterData(data);
-            });
+            }).catch(err=>{
+              console.log(err)
+            })
         }, []);
         const filterArea = type => {
           const typeAry = img.filter(v => {

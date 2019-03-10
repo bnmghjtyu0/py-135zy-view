@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 def links_compile():
     arr = []
-    for i in range(50):
+    for i in range(10):
         r = requests.get(
             'http://135zy.vip/?m=vod-index-pg-{}.html'.format(i+1))
         soup = BeautifulSoup(r.text)
