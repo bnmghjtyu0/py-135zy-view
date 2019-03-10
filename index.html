@@ -33,44 +33,129 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.3/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
     <script type="text/babel">
-      const { useState, useEffect } = React
+      const { useState, useEffect } = React;
       const App = () => {
-        const [img, setImg] = useState([])
+        const [img, setImg] = useState([]);
+        const [filterData, setfilterData] = useState([]);
         useEffect(() => {
-          fetch('data.json')
+          fetch("data.json")
             .then(res => {
-              return res.json()
+              return res.json();
             })
             .then(data => {
-              console.log(data)
-              setImg(data)
-            })
-        }, [])
-        if (img) {
+              console.log(data.length);
+              setImg(data);
+              setfilterData(data);
+            });
+        }, []);
+        const filterArea = type => {
+          const typeAry = img.filter(v => {
+            if (v.infoArea === type) {
+              return v;
+            }
+          });
+          setfilterData(typeAry);
+        };
+        const filterType = type => {
+          const typeAry = img.filter(v => {
+            if (v.infoType === type) {
+              return v;
+            }
+          });
+          console.log(typeAry);
+          setfilterData(typeAry);
+        };
+        if (filterData) {
           return (
             <div className="container">
+              <button onClick={() => setfilterData(img)}>all</button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>台湾</span></li>")}
+              >
+                台湾
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>韩国</span></li>")}
+              >
+                韩国
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>美国</span></li>")}
+              >
+                美国
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>日本</span></li>")}
+              >
+                日本
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>法国</span></li>")}
+              >
+                法国
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>大陆</span></li>")}
+              >
+                大陆
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>泰国</span></li>")}
+              >
+                泰国
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>西班牙</span></li>")}
+              >
+                西班牙
+              </button>
+              <button
+                onClick={() => filterArea("<li>地区：<span>其它</span></li>")}
+              >
+                其它
+              </button>
+              <button
+                onClick={() => filterType("<li>类型：<span>伦理片</span></li>")}
+              >
+                sexy
+              </button>
               <div className="row">
-                {img.map(v => {
+                {filterData.map(v => {
+                  // if (v.infoType === "<li>类型：<span>伦理片</span></li>")
+                  //   return false;
+                  if (v.infoType === "<li>类型：<span>美女热舞写真</span></li>")
+                    return false;
+                  if (v.infoType === "<li>类型：<span>VIP视频秀</span></li>")
+                    return false;
                   return (
                     <div className="col-md-2">
+                      {/*          {console.log(v.infoArea)} */}
                       <a href={v.imgUrl} target="_blank">
                         <img src={v.imgSrc} className="img-fluid" />
                         <h5>{v.imgTitle}</h5>
                         <ul>
-                          <li dangerouslySetInnerHTML={{ __html: v.infoArea }} />
-                          <li dangerouslySetInnerHTML={{ __html: v.infoRelease }} />
-                          <li dangerouslySetInnerHTML={{ __html: v.infoType }} />
+                          <li
+                            dangerouslySetInnerHTML={{ __html: v.infoArea }}
+                          />
+                          <li
+                            dangerouslySetInnerHTML={{ __html: v.infoRelease }}
+                          />
+                          <li
+                            dangerouslySetInnerHTML={{ __html: v.infoType }}
+                          />
                         </ul>
                       </a>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
-          )
+          );
+        } else {
+          <div>no data</div>;
         }
-      }
-      ReactDOM.render(<App />, document.querySelector('#app'))
+      };
+      ReactDOM.render(<App />, document.querySelector("#app"));
     </script>
   </body>
 </html>
