@@ -14,7 +14,7 @@ import scrapy
 
 def links_compile():
     arr = []
-    for i in range(100):
+    for i in range(20):
         r = requests.get(
             'http://135zy.vip/?m=vod-index-pg-{}.html'.format(i+1))
         soup = BeautifulSoup(r.text)
