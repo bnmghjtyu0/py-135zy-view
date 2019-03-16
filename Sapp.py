@@ -14,7 +14,7 @@ import scrapy
 
 def links_compile():
     arr = []
-    for i in range(20):
+    for i in range(100):
         r = requests.get(
             'http://135zy.vip/?m=vod-index-pg-{}.html'.format(i+1))
         soup = BeautifulSoup(r.text)
@@ -59,58 +59,3 @@ class richardSpider(scrapy.Spider):
         }
         for next_page in All_innerPage_Links:
             yield response.follow(next_page, self.parse)
-
-# def spider_opened(self, spider):
-#     spider.started_on = datetime.now()
-
-# def spider_closed(self, spider):
-#     work_time = datetime.now() - spider.started_on
-# for next_page in All_innerPage_Links:
-#             yield response.follow(next_page, self.parse)
-
-# class richardSpider(scrapy.Spider):
-#     name: 'Richard'
-#     start_urls = ['https://morvanzhou.github.io']
-#     print(start_urls)
-
-#     def parse(self, response):
-#         yield{
-#             'imgUrl': response.css('.vodBox img[0]::attr("src")')
-#         }
-
-        # def renderInfo():
-        #     for i in All_innerPage_Links:
-        #         r = requests.get(i)
-        #         soup = BeautifulSoup(r.text)
-        #         imgSrc = soup.select('.vodBox img')[0]['src']
-        #         imgTitle = soup.select('.vodBox img')[0]['alt']
-        #         infoName = soup.select('.vodinfobox ul li')[0]
-        #         infoAuth = soup.select('.vodinfobox ul li')[1]
-        #         infoActor = soup.select('.vodinfobox ul li')[2]
-        #         infoType = soup.select('.vodinfobox ul li')[3]
-        #         infoArea = soup.select('.vodinfobox ul li')[4]
-        #         infoLang = soup.select('.vodinfobox ul li')[5]
-        #         infoRelease = soup.select('.vodinfobox ul li')[6]
-        #         infoUpdate = soup.select('.vodinfobox ul li')[7]
-        #         yield {
-        #             'imgUrl': str(r.url),
-        #             'imgSrc': str(imgSrc),
-        #             'imgTitle': str(imgTitle),
-        #             'infoName': str(infoName),
-        #             'infoAuth': str(infoAuth),
-        #             'infoActor': str(infoActor),
-        #             'infoType': str(infoType),
-        #             'infoArea': str(infoArea),
-        #             'infoLang': str(infoLang),
-        #             'infoRelease': str(infoRelease),
-        #             'infoUpdate': str(infoUpdate),
-        #         }
-
-        # infoDatas = renderInfo()
-
-        # datas = []
-        # for x in infoDatas:
-        #     datas.append(x)
-
-        # with open('data.json', 'w') as outfile:
-        #     json.dump(datas, outfile)
