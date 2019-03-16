@@ -13,7 +13,6 @@ body {
 }
 
 body {
-  padding: 1rem;
   font-family: 'Noto Sans TC', sans-serif;
 }
 
@@ -69,4 +68,28 @@ body {
   border: 1px solid var(--primary);
   background-color: var(--primary);
   color: #fff;
+}
+
+.listInfo li {
+  list-style: none;
+  color: #333;
+}
+
+.cardInfo h5 {
+  color: #333;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    font-size: 1rem;
+  }
+  .goLink {
+    right: 1rem;
+    bottom: 1rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0.8rem;
+  }
 }
