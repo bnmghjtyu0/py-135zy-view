@@ -11,6 +11,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
     <div id="app"></div>
@@ -33,130 +35,194 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.3/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
     <script type="text/babel">
-      const { useState, useEffect } = React;
+      const { useState, useEffect } = React
+
+      const RadioBox = props => {
+        const change = e => {
+          props.handleChange(e)
+        }
+        return (
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={props.name} id={props.id} value={props.value} onChange={e => change(e)} checked={props.checked} />
+            <label class="form-check-label" for={props.id}>
+              {props.value}
+            </label>
+          </div>
+        )
+      }
+
       const App = () => {
-        const [img, setImg] = useState([]);
-        const [filterData, setfilterData] = useState([]);
+        const areaList = [
+          { name: 'area', value: 'all' },
+          { name: 'area', value: '台湾' },
+          { name: 'area', value: '韩国' },
+          { name: 'area', value: '美国' },
+          { name: 'area', value: '日本' },
+          { name: 'area', value: '法国' },
+          { name: 'area', value: '香港' },
+          { name: 'area', value: '大陆' },
+          { name: 'area', value: '泰国' },
+          { name: 'area', value: '西班牙' },
+          { name: 'area', value: '其它' }
+        ]
+        const ReleaseList = [
+          { name: 'Release', value: 'all' },
+          { name: 'Release', value: '2019' },
+          { name: 'Release', value: '2018' },
+          { name: 'Release', value: '2017' },
+          { name: 'Release', value: '2016' },
+          { name: 'Release', value: '2015' },
+          { name: 'Release', value: '2014' }
+        ]
+        const typeList = [
+          { name: 'type', value: 'all' },
+          { name: 'type', value: '剧情片' },
+          { name: 'type', value: '科幻片' },
+          { name: 'type', value: '动作片' },
+          { name: 'type', value: '动漫' },
+          { name: 'type', value: '日剧' },
+          { name: 'type', value: '韩剧' },
+          { name: 'type', value: '欧美剧' },
+          { name: 'type', value: '港剧' },
+          { name: 'type', value: '台剧' },
+          { name: 'type', value: '国产剧喜剧 科幻' },
+          { name: 'type', value: '国产剧' },
+          { name: 'type', value: '综艺' },
+          { name: 'type', value: '欧美剧喜剧' },
+          { name: 'type', value: '欧美剧犯罪' },
+          { name: 'type', value: '泰剧' },
+          { name: 'type', value: '欧美剧悬疑 犯罪' },
+          { name: 'type', value: '伦理片' },
+          { name: 'type', value: '欧美剧悬疑 犯罪' },
+          { name: 'type', value: '爱情片' },
+          { name: 'type', value: '美女热舞写真' },
+          { name: 'type', value: '纪录片' },
+          { name: 'type', value: 'VIP视频秀' },
+          { name: 'type', value: '街拍美女视频' }
+        ]
+        const [img, setImg] = useState([])
+        const [filterData, setfilterData] = useState([])
+        const [radioCheck, setRadioCheck] = useState({ area: 'all', Release: 'all', Type: 'all' })
         useEffect(() => {
-          fetch("./data/data.json")
+          fetch('res.json')
             .then(res => {
-              return res.json();
+              return res.json()
             })
             .then(data => {
-              console.log(data.length);
-              setImg(data);
-              setfilterData(data);
-            }).catch(err=>{
+              console.log(data.length)
+
+              setImg(data)
+              setfilterData(data)
+            })
+            .catch(err => {
               console.log(err)
             })
-        }, []);
-        const filterArea = type => {
-          const typeAry = img.filter(v => {
-            if (v.infoArea === type) {
-              return v;
+        }, [])
+
+        const handleChange = e => {
+          // console.log(e.target.value);
+          areaList.map(val => {
+            val['checked'] = false
+            if (val.value === e.target.value) {
+              val['checked'] = true
             }
-          });
-          setfilterData(typeAry);
-        };
-        const filterType = type => {
-          const typeAry = img.filter(v => {
-            if (v.infoType === type) {
-              return v;
+          })
+          const checkedList = areaList.filter(val => {
+            if (val.checked) {
+              return val
             }
-          });
-          setfilterData(typeAry);
-        };
-        if (filterData) {
+          })
+          setRadioCheck({ ...radioCheck, area: checkedList[0].value })
+        }
+
+        const hadleChangeRelease = e => {
+          ReleaseList.map(val => {
+            val['checked'] = false
+            if (val.value === e.target.value) {
+              val['checked'] = true
+            }
+          })
+          const checkedRelease = ReleaseList.filter(val => {
+            if (val.checked) {
+              return val
+            }
+          })
+          setRadioCheck({ ...radioCheck, Release: checkedRelease[0].value })
+        }
+        const hadleChangeType = e => {
+          typeList.map(val => {
+            val['checked'] = false
+            if (val.value === e.target.value) {
+              val['checked'] = true
+            }
+          })
+          const checkedType = typeList.filter(val => {
+            if (val.checked) {
+              return val
+            }
+          })
+          setRadioCheck({ ...radioCheck, Type: checkedType[0].value })
+        }
+
+        const aa = img.filter(val => {
+          const areaPipe = radioCheck.area === 'all' ? true : val.infoArea[1] === radioCheck.area
+          const ReleasePipe = radioCheck.Release === 'all' ? true : val.infoRelease[1] === radioCheck.Release
+          const TypePipe = radioCheck.Type === 'all' ? true : val.infoType[1] === radioCheck.Type
+          if (areaPipe && ReleasePipe && TypePipe) {
+            return val
+          }
+        })
+
+        if (aa) {
           return (
             <div className="container">
-              <button onClick={() => setfilterData(img)}>all</button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>台湾</span></li>")}
-              >
-                台湾
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>韩国</span></li>")}
-              >
-                韩国
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>美国</span></li>")}
-              >
-                美国
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>日本</span></li>")}
-              >
-                日本
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>法国</span></li>")}
-              >
-                法国
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>大陆</span></li>")}
-              >
-                大陆
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>泰国</span></li>")}
-              >
-                泰国
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>西班牙</span></li>")}
-              >
-                西班牙
-              </button>
-              <button
-                onClick={() => filterArea("<li>地区：<span>其它</span></li>")}
-              >
-                其它
-              </button>
-              <button
-                onClick={() => filterType("<li>类型：<span>伦理片</span></li>")}
-              >
-                sexy
-              </button>
+              <div className="mb-2">{`目前筆數:${aa.length}`}</div>
+              <div>
+                {areaList.map((val, i) => {
+                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={handleChange} checked={val.checked} />
+                })}
+              </div>
+              <div>
+                {ReleaseList.map((val, i) => {
+                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeRelease} checked={val.checked} />
+                })}
+              </div>
+              <div>
+                {typeList.map((val, i) => {
+                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeType} checked={val.checked} />
+                })}
+              </div>
+
               <div className="row">
-                {filterData.map(v => {
+                {aa.map(v => {
                   // if (v.infoType === "<li>类型：<span>伦理片</span></li>")
                   //   return false;
-                  if (v.infoType === "<li>类型：<span>美女热舞写真</span></li>")
-                    return false;
-                  if (v.infoType === "<li>类型：<span>VIP视频秀</span></li>")
-                    return false;
+                  // if (v.infoType === '<li>类型：<span>美女热舞写真</span></li>') return false
+                  // if (v.infoType === '<li>类型：<span>VIP视频秀</span></li>') return false
                   return (
                     <div className="col-md-2">
-                      {/*          {console.log(v.infoArea)} */}
                       <a href={v.imgUrl} target="_blank">
                         <img src={v.imgSrc} className="img-fluid" />
                         <h5>{v.imgTitle}</h5>
                         <ul>
-                          <li
-                            dangerouslySetInnerHTML={{ __html: v.infoArea }}
-                          />
-                          <li
-                            dangerouslySetInnerHTML={{ __html: v.infoRelease }}
-                          />
-                          <li
-                            dangerouslySetInnerHTML={{ __html: v.infoType }}
-                          />
+                          <li>{`${v.infoArea[0]}${v.infoArea[1]}`}</li>
+                          <li>{`${v.infoRelease[0]}${v.infoRelease[1]}`}</li>
+                          <li>{`${v.infoType[0]}${v.infoType[1]}`}</li>
+                          <li>{`${v.infoActor[0]}${v.infoActor[1]}`}</li>
                         </ul>
                       </a>
                     </div>
-                  );
+                  )
                 })}
               </div>
+              <a href="https://bnmghjtyu0.github.io/lets_api/#/zy135" className="goLink" target="_blank">
+                Play
+              </a>
             </div>
-          );
-        } else {
-          <div>no data</div>;
+          )
         }
-      };
-      ReactDOM.render(<App />, document.querySelector("#app"));
+      }
+      ReactDOM.render(<App />, document.querySelector('#app'))
     </script>
   </body>
 </html>

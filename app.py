@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 from io import BytesIO
 from PIL import Image
@@ -12,7 +13,7 @@ from bs4 import BeautifulSoup
 
 def links_compile():
     arr = []
-    for i in range(10):
+    for i in range(1):
         r = requests.get(
             'http://135zy.vip/?m=vod-index-pg-{}.html'.format(i+1))
         soup = BeautifulSoup(r.text)
@@ -31,7 +32,9 @@ def pipe_links_id():
 
 
 All_innerPage_Links = pipe_links_id()
-print(len(All_innerPage_Links))
+# print(len(All_innerPage_Links))
+
+print(All_innerPage_Links)
 
 
 def renderInfo():
