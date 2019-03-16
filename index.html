@@ -177,17 +177,17 @@
           return (
             <div className="container">
               <div className="mb-2">{`目前筆數:${aa.length}`}</div>
-              <div>
+              <div className="row flex-nowrap" style={{ overflowX: 'auto' }}>
                 {areaList.map((val, i) => {
                   return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={handleChange} checked={val.checked} />
                 })}
               </div>
-              <div>
+              <div className="row flex-nowrap" style={{ overflowX: 'auto' }}>
                 {ReleaseList.map((val, i) => {
                   return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeRelease} checked={val.checked} />
                 })}
               </div>
-              <div>
+              <div className="row flex-nowrap" style={{ overflowX: 'auto' }}>
                 {typeList.map((val, i) => {
                   return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeType} checked={val.checked} />
                 })}
@@ -200,7 +200,7 @@
                   // if (v.infoType === '<li>类型：<span>美女热舞写真</span></li>') return false
                   // if (v.infoType === '<li>类型：<span>VIP视频秀</span></li>') return false
                   return (
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                       <a href={v.imgUrl} target="_blank">
                         <img src={v.imgSrc} className="img-fluid" />
                         <h5>{v.imgTitle}</h5>
