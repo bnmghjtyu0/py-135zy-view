@@ -11,7 +11,10 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Sans+TC"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
@@ -34,167 +37,223 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.3/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.3/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <script src="./utils/config.js"></script>
     <script type="text/babel">
-      const { useState, useEffect } = React
+      const { useState, useEffect } = React;
 
       const RadioBox = props => {
         const change = e => {
-          props.handleChange(e)
-        }
+          props.handleChange(e);
+        };
         return (
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name={props.name} id={props.id} value={props.value} onChange={e => change(e)} checked={props.checked} />
+            <input
+              class="form-check-input"
+              type="radio"
+              name={props.name}
+              id={props.id}
+              value={props.value}
+              onChange={e => change(e)}
+              checked={props.checked}
+            />
             <label class="form-check-label" for={props.id}>
               {props.value}
             </label>
           </div>
-        )
-      }
+        );
+      };
 
       const App = () => {
         const areaList = [
-          { name: 'area', value: 'all' },
-          { name: 'area', value: '台湾' },
-          { name: 'area', value: '韩国' },
-          { name: 'area', value: '美国' },
-          { name: 'area', value: '日本' },
-          { name: 'area', value: '法国' },
-          { name: 'area', value: '香港' },
-          { name: 'area', value: '大陆' },
-          { name: 'area', value: '泰国' },
-          { name: 'area', value: '西班牙' },
-          { name: 'area', value: '其它' }
-        ]
+          { name: "area", value: "all" },
+          { name: "area", value: "台湾" },
+          { name: "area", value: "韩国" },
+          { name: "area", value: "美国" },
+          { name: "area", value: "日本" },
+          { name: "area", value: "法国" },
+          { name: "area", value: "香港" },
+          { name: "area", value: "大陆" },
+          { name: "area", value: "泰国" },
+          { name: "area", value: "西班牙" },
+          { name: "area", value: "其它" }
+        ];
         const ReleaseList = [
-          { name: 'Release', value: 'all' },
-          { name: 'Release', value: '2019' },
-          { name: 'Release', value: '2018' },
-          { name: 'Release', value: '2017' },
-          { name: 'Release', value: '2016' },
-          { name: 'Release', value: '2015' },
-          { name: 'Release', value: '2014' }
-        ]
+          { name: "Release", value: "all" },
+          { name: "Release", value: "2019" },
+          { name: "Release", value: "2018" },
+          { name: "Release", value: "2017" },
+          { name: "Release", value: "2016" },
+          { name: "Release", value: "2015" },
+          { name: "Release", value: "2014" }
+        ];
         const typeList = [
-          { name: 'type', value: 'all' },
-          { name: 'type', value: '剧情片' },
-          { name: 'type', value: '科幻片' },
-          { name: 'type', value: '动作片' },
-          { name: 'type', value: '爱情片' },
-          { name: 'type', value: '动漫' },
-          { name: 'type', value: '日剧' },
-          { name: 'type', value: '韩剧' },
-          { name: 'type', value: '欧美剧' },
-          { name: 'type', value: '港剧' },
-          { name: 'type', value: '台剧' },
-          { name: 'type', value: '国产剧喜剧 科幻' },
-          { name: 'type', value: '国产剧' },
-          { name: 'type', value: '综艺' },
-          { name: 'type', value: '欧美剧喜剧' },
-          { name: 'type', value: '欧美剧犯罪' },
-          { name: 'type', value: '泰剧' },
-          { name: 'type', value: '欧美剧悬疑 犯罪' },
-          { name: 'type', value: '伦理片' },
-          { name: 'type', value: '欧美剧悬疑 犯罪' },
-          { name: 'type', value: '美女热舞写真' },
-          { name: 'type', value: '纪录片' },
-          { name: 'type', value: 'VIP视频秀' },
-          { name: 'type', value: '街拍美女视频' }
-        ]
-        const [img, setImg] = useState([])
-        const [filterData, setfilterData] = useState([])
-        const [radioCheck, setRadioCheck] = useState({ area: 'all', Release: 'all', Type: 'all' })
+          { name: "type", value: "all" },
+          { name: "type", value: "剧情片" },
+          { name: "type", value: "科幻片" },
+          { name: "type", value: "动作片" },
+          { name: "type", value: "爱情片" },
+          { name: "type", value: "动漫" },
+          { name: "type", value: "日剧" },
+          { name: "type", value: "韩剧" },
+          { name: "type", value: "欧美剧" },
+          { name: "type", value: "港剧" },
+          { name: "type", value: "台剧" },
+          { name: "type", value: "国产剧喜剧 科幻" },
+          { name: "type", value: "国产剧" },
+          { name: "type", value: "综艺" },
+          { name: "type", value: "欧美剧喜剧" },
+          { name: "type", value: "欧美剧犯罪" },
+          { name: "type", value: "泰剧" },
+          { name: "type", value: "欧美剧悬疑 犯罪" },
+          { name: "type", value: "伦理片" },
+          { name: "type", value: "欧美剧悬疑 犯罪" },
+          { name: "type", value: "美女热舞写真" },
+          { name: "type", value: "纪录片" },
+          { name: "type", value: "VIP视频秀" },
+          { name: "type", value: "街拍美女视频" }
+        ];
+        const [img, setImg] = useState([]);
+        const [filterData, setfilterData] = useState([]);
+        const [radioCheck, setRadioCheck] = useState({
+          area: "all",
+          Release: "all",
+          Type: "all"
+        });
         useEffect(() => {
-          fetch('res.json')
+          fetch("res.json")
             .then(res => {
-              return res.json()
+              return res.json();
             })
             .then(json => {
-              console.log(json.length)
+              console.log(json.length);
 
-              setImg(json)
-              setfilterData(json)
+              setImg(json);
+              setfilterData(json);
             })
             .catch(err => {
-              console.log(err)
-            })
-        }, [])
+              console.log(err);
+            });
+        }, []);
 
         const handleChange = e => {
           // console.log(e.target.value);
           areaList.map(val => {
-            val['checked'] = false
+            val["checked"] = false;
             if (val.value === e.target.value) {
-              val['checked'] = true
+              val["checked"] = true;
             }
-          })
+          });
           const checkedList = areaList.filter(val => {
             if (val.checked) {
-              return val
+              return val;
             }
-          })
-          setRadioCheck({ ...radioCheck, area: checkedList[0].value })
-        }
+          });
+          setRadioCheck({ ...radioCheck, area: checkedList[0].value });
+        };
 
         const hadleChangeRelease = e => {
           ReleaseList.map(val => {
-            val['checked'] = false
+            val["checked"] = false;
             if (val.value === e.target.value) {
-              val['checked'] = true
+              val["checked"] = true;
             }
-          })
+          });
           const checkedRelease = ReleaseList.filter(val => {
             if (val.checked) {
-              return val
+              return val;
             }
-          })
-          setRadioCheck({ ...radioCheck, Release: checkedRelease[0].value })
-        }
+          });
+          setRadioCheck({ ...radioCheck, Release: checkedRelease[0].value });
+        };
         const hadleChangeType = e => {
           typeList.map(val => {
-            val['checked'] = false
+            val["checked"] = false;
             if (val.value === e.target.value) {
-              val['checked'] = true
+              val["checked"] = true;
             }
-          })
+          });
           const checkedType = typeList.filter(val => {
             if (val.checked) {
-              return val
+              return val;
             }
-          })
-          setRadioCheck({ ...radioCheck, Type: checkedType[0].value })
-        }
-
-        const aa = img.filter(val => {
-          const areaPipe = radioCheck.area === 'all' ? true : val.infoArea[1] === radioCheck.area
-          const ReleasePipe = radioCheck.Release === 'all' ? true : val.infoRelease[1] === radioCheck.Release
-          const TypePipe = radioCheck.Type === 'all' ? true : val.infoType[1] === radioCheck.Type
+          });
+          setRadioCheck({ ...radioCheck, Type: checkedType[0].value });
+        };
+        const acc = dedupeByProperty(img, "imgTitle");
+        const aa = acc.filter(val => {
+          // const sameDrama =
+          const areaPipe =
+            radioCheck.area === "all"
+              ? true
+              : val.infoArea[1] === radioCheck.area;
+          const ReleasePipe =
+            radioCheck.Release === "all"
+              ? true
+              : val.infoRelease[1] === radioCheck.Release;
+          const TypePipe =
+            radioCheck.Type === "all"
+              ? true
+              : val.infoType[1] === radioCheck.Type;
           if (areaPipe && ReleasePipe && TypePipe) {
-            return val
+            return val;
           }
-        })
+        });
 
-        if (aa) {
-          return (
-            <div className="container">
-              <div className="mb-2 w-100">{`目前筆數:${aa.length}`}</div>
-              <div className="d-flex d-md-block flex-nowrap" style={{ overflowX: 'auto' }}>
-                {areaList.map((val, i) => {
-                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={handleChange} checked={val.checked} />
-                })}
-              </div>
-              <div className="d-flex d-md-block  flex-nowrap" style={{ overflowX: 'auto' }}>
-                {ReleaseList.map((val, i) => {
-                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeRelease} checked={val.checked} />
-                })}
-              </div>
-              <div className="d-flex d-md-block  flex-nowrap" style={{ overflowX: 'auto' }}>
-                {typeList.map((val, i) => {
-                  return <RadioBox name={val.name} id={`${val.name}${i}`} value={val.value} handleChange={hadleChangeType} checked={val.checked} />
-                })}
-              </div>
+        return (
+          <div className="container">
+            <div className="mb-2 w-100">{`目前筆數:${aa.length}`}</div>
+            <div
+              className="d-flex d-md-block flex-nowrap"
+              style={{ overflowX: "auto" }}
+            >
+              {areaList.map((val, i) => {
+                return (
+                  <RadioBox
+                    name={val.name}
+                    id={`${val.name}${i}`}
+                    value={val.value}
+                    handleChange={handleChange}
+                    checked={val.checked}
+                  />
+                );
+              })}
+            </div>
+            <div
+              className="d-flex d-md-block  flex-nowrap"
+              style={{ overflowX: "auto" }}
+            >
+              {ReleaseList.map((val, i) => {
+                return (
+                  <RadioBox
+                    name={val.name}
+                    id={`${val.name}${i}`}
+                    value={val.value}
+                    handleChange={hadleChangeRelease}
+                    checked={val.checked}
+                  />
+                );
+              })}
+            </div>
+            <div
+              className="d-flex d-md-block  flex-nowrap"
+              style={{ overflowX: "auto" }}
+            >
+              {typeList.map((val, i) => {
+                return (
+                  <RadioBox
+                    name={val.name}
+                    id={`${val.name}${i}`}
+                    value={val.value}
+                    handleChange={hadleChangeType}
+                    checked={val.checked}
+                  />
+                );
+              })}
+            </div>
 
-              <div className="row">
-                {aa.map(v => {
+            <div className="row">
+              {aa &&
+                aa.map(v => {
                   return (
                     <div className="col-6 col-md-2">
                       <a className="cardInfo" href={v.imgUrl} target="_blank">
@@ -208,17 +267,20 @@
                         </ul>
                       </a>
                     </div>
-                  )
+                  );
                 })}
-              </div>
-              <a href="https://bnmghjtyu0.github.io/lets_api/#/zy135" className="goLink" target="_blank">
-                Play
-              </a>
             </div>
-          )
-        }
-      }
-      ReactDOM.render(<App />, document.querySelector('#app'))
+            <a
+              href="https://bnmghjtyu0.github.io/lets_api/#/zy135"
+              className="goLink"
+              target="_blank"
+            >
+              Play
+            </a>
+          </div>
+        );
+      };
+      ReactDOM.render(<App />, document.querySelector("#app"));
     </script>
   </body>
 </html>
