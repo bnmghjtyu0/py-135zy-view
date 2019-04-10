@@ -82,7 +82,7 @@ body {
 @media (max-width: 767px) {
   html,
   body {
-    font-size: 1rem;
+    font-size: 62.5%;
   }
   .goLink {
     right: 1rem;
